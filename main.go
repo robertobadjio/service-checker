@@ -20,11 +20,13 @@ func main() {
 		fmt.Println("Param 'process' must be set")
 		return
 	}
+	runProcess(processName)
 
 	out, err := exec.Command("pgrep", "-o", processName).Output()
 
 	if err != nil {
 		fmt.Printf("Not found: %s\n", err)
+		runProcess(processName)
 		return
 	}
 
@@ -45,8 +47,8 @@ func main() {
 }
 
 func runProcess(processName string) {
-	_, err := exec.Command("cd /var/" + processName + " && ./" + processName).Output()
+	_, err := exec.Command("/bin/sh", "-c", "cd /var/" + processName + " && ./" + processName).Output()
 	if err != nil {
-		fmt.Printf("Error starting service: %s", processName)
+		fmt.Printf("Error starting service: %s. Error: %s\n", processName, err)
 	}
 }
