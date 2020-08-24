@@ -20,7 +20,6 @@ func main() {
 		fmt.Println("Param 'process' must be set")
 		return
 	}
-	runProcess(processName)
 
 	out, err := exec.Command("pgrep", "-o", processName).Output()
 
