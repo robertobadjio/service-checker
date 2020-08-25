@@ -46,7 +46,7 @@ func main() {
 }
 
 func runProcess(processName string) {
-	_, err := exec.Command("/bin/sh", "-c", "cd /var/" + processName + " && ./" + processName).Output()
+	_, err := exec.Command("/bin/sh", "-c", "cd /var/" + processName + " && ./" + processName + " -config='./config'").Output()
 	if err != nil {
 		fmt.Printf("Error starting service: %s. Error: %s\n", processName, err)
 	}
